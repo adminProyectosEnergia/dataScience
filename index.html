@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <title>North Carolina Training and Education Map</title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="description" content="The NC Sustainable Energy Association (NCSEA) is a recognized a 501(c)(3) non-profit, nonpartisan advocacy organization dedicated to shaping North Carolina’s clean energy future through commonsense policy solutions that enable clean energy jobs, economic opportunities and affordable energy to strengthen the state’s position as a leader in the new energy economy.">
+	<meta name="keywords" content="North Carolina,sustainable,clean,energy,advocates,legislative policy,economic development ">
+	
+	<script src="./js/webfont.js" async=""></script><script async="" src="./js/ga.js"></script><script async="" src="./js/analytics.js"></script><script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','http://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-2017166-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+	
+	<script type="text/javascript">
+	var _gaq = _gaq || [];_gaq.push(['YM._setAccount', 'UA-2449742-47'], ['YM._setDomainName', 'none'], ['YM._setAllowLinker', true], ['YM._trackPageview']);
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+	<script type="text/javascript">
+		var m_pulse = new Pulse('');
+		m_pulse.Start();
+	</script>
+
+
+	<script type="text/javascript">
+		YAHOO.util.Event.onDOMReady(getChats);
+		addEventHandler_OnUnload(function(){ if(m_ChatTID) clearTimeout(m_ChatTID) });
+	</script>
+			
+    <!-- Styles -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="./css/combined.css">
+	<link rel="stylesheet" type="text/css" href="./css/container.css">
+	<link rel="stylesheet" type="text/css" href="./css/awesome-bootstrap-checkbox.css">
+		
+    <link rel="stylesheet" href="css/custom.css"/>
+
+<!-- 	<link rel="stylesheet" type="text/css" href="./resources/syntax/shCore.css">
+	<link rel="stylesheet" type="text/css" href="./resources/demo.css">
+	<link rel="stylesheet" type="text/css" href="./css/mytablecss.css"/> -->
+	
+
+	<!-- <script src="./js/prettify.js"></script> -->
+	
+	 <link rel="stylesheet" href="css/mytablecss.css"/>
+	<link rel="stylesheet" href="css/jquery.dataTables.css"/>
+	<link rel="stylesheet" href="./css/theme.blue.css">
+	 <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery.tablesorter.mod.js"></script>
+	<script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" language="javascript" src="./resources/syntax/shCore.js"></script>
+	<script type="text/javascript" language="javascript" src="./resources/demo.js"></script>
+	<script type="text/javascript" language="javascript" src="./js/dataset.js"></script> 
+	<script type="text/javascript" language="javascript" src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" src="./js/tablechild_map.js"></script>
+	
+  </head>
+  <body>
+  <div id="wrapper">
+	
+	<!-- <a href="http://www.energync.org/" target="_parent" class="logo"><img src="images/NCSEA_logo_horizontal_reversed.png"></a> -->
+	
+   <a href="http://www.energync.org/"><img src="images/NCSEA_logo_horizontal_reversed.png" alt="NCSEA Icon"> </a>
+  
+    <div class='navbar navbar-default navbar-static-top'>
+	
+      <div class='container-fluid'>
+	  
+        <div class="navbar-header">
+		  
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+          </button>
+          <a class='navbar-brand' href='index.html'>North Carolina Education and Training Programs</a>
+        </div><!--/.nav-header -->
+		
+		<div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right" role="tablist">
+			<li class="active" role="presentation">
+				<a data-toggle="tab" role="tab" aria-controls="home" href="index.html" id='home_box'>
+					<i class="glyphicon glyphicon-globe"></i>
+					Map
+				</a>
+			</li>
+
+			<li  class="inactive" role="presentation">
+				<a href="about.html" id='about_box'>
+					<i class="glyphicon glyphicon-info-sign"></i>
+					About
+				</a>
+		    </li>
+          </ul>
+        </div><!--/nav-collapse -->
+      </div><!--/container-fluid -->
+    </div><!--/navbar navbar-default -->
+   </div>
+   
+	<div class='container-fluid'>
+      <div class='row' >
+        <div class='col-md-4'>
+        		<div id="SearchSidebar">
+	        		<div class="panel-group" id="sidebarAccordion" aria-multiselectable="true" role="tablist">
+		        		<div class="panel panel-default">
+			        		
+							<div class="panel-heading" id="gettingStarted" role="tab">
+			        			<a class="panel-title" data-toggle="collapse" data-parent="#sidebarAccordion" href="index.html#collapseStarted" aria-controls="collapseStarted" aria-expanded="true"> 
+			        				<h2 class="panel-title">Getting Started</h2>
+			        			</a>
+			        		</div>
+			        		<div id="collapseStarted" class="panel-collapse collapse in" aria-labelledby="gettingStarted" role="tabpanel">
+			        			<div class="panel-body">
+			
+					        	  	 <p > Use this map to find information about education and training programs in North Carolina related to the Clean Energy Industry. </p>
+									<p><a href="table.html">Additionally, you can view this information in a dynamic table &raquo;</a></p>
+							         <ul>
+							         	<li>
+							         		<strong> <font color="#FB6353">Colleges and Universities </font></strong> with degree programs or specializations in clean energy fields  <em>
+											Most of the programs ... </em>
+							         	</li>
+							         	<li>
+							         		<strong> <font color="#5781FC"> Community Colleges: </font></strong> that offer two-year degrees or certificates for jobs in the expanding field of energy efficiency and renewable energy.			         	
+										</li>
+										<li>
+							         		<strong> <font color="#cc9a04"> Workforce Training Centers</font></strong>. Government agencies fund specific trainings and courses in Energy and Manufacturing across the US at various Community College and Universities. See a growing list of opportunities available. </em>
+							         	</li>
+							         </ul>
+							         <p>
+							          	<strong class="text-danger">Important:</strong> Please visit <a 
+										href="http://www.energync.org"><u>our site </u></a> to know more about the clean energy industry in North Carolina.
+							         </p>
+						         </div>
+							</div>
+						</div>
+
+						<div class="panel panel-primary">
+							<div class="panel-heading" role="tab" id="SearchHeading">
+								<a class="panel-title collapsed" aria-controls="collapseSearch" aria-expanded="true" href="index.html#collapseSearch" data-parent="#sidebarAccordion" data-toggle="collapse">
+								<h2 class="panel-title">Search by</h2></a>
+							</div>
+							<div id="collapseSearch" class="panel-collapse collapse" role="tabpanel" aria-labelledby="SearchHeading">
+								<div class="panel-body">
+									<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+										      <h3 class="panel-title"> <strong> Training Features: </strong></h3>
+										    
+			      								<div class="panel-body">
+													<div class="form-group form-group-sm">
+			      											<label class="col-sm-3 control-label">Area:</label>
+			      											<div class="col-sm-9">
+														        <select id='area_filter' class="form-control input-sm ">
+																  	<option value=''>Any type</option>
+																	<option value='Alternative Fuels '>Alternative Fuels </option>
+																	<option value='Bioenergy'>Bioenergy</option>
+																	<option value='Biomass'>Biomass</option>
+																	<option value='Building Sciences'>Building Sciences</option>
+																	<option value='Energy Efficiency'>Energy Efficiency</option>
+																	<option value='Energy Storage'>Energy Storage</option>
+																	<option value='Electric Vehicles'>Electric Vehicles</option>
+																	<option value='Geothermal'>Geothermal</option>
+																	<option value='Renewable Energy'>Renewable Energy</option>
+																	<option value='Smart Grid'>Smart Grid</option>
+																	<option value='Solar Thermal'>Solar Thermal</option>
+																	<option value='Solar PV'>Solar PV</option>
+																	<option value='Sustainability'>Sustainability</option>
+																	<option value='Waste to Energy'>Waste to Energy</option>
+																	<option value='Water Conservation'>Water Conservation</option>
+																	<option value='Wind'>Wind</option>
+														        </select>
+			      											</div>
+			     									</div>
+													<br>
+													<div class="form-group form-group-sm">
+			      											<label class="col-sm-3 control-label">Format:</label>
+			      											<div class="col-sm-9">
+														         <select id='format_filter' class="form-control input-sm ">
+																<!-- <select id='col5_filter' class="form-control input-sm "> -->
+																  	<option value=''>Any format</option>
+																	<option value='Classroom'>Classroom</option>
+																	<option value='Technical Conference Classes'>Technical Conference Classes</option>
+																	<option value='Webinar'>Webinar</option>
+																	<option value='Online'>Online</option>
+														        </select>
+			      											</div>
+			     									</div>
+													<br>
+													<div class="form-group form-group-sm">
+														<label class="col-sm-12 control-label">Type of Institution:</label>
+														<div class="col-sm-3"></div>
+														<div class="col-sm-9" id="selectors" >
+														
+															<div class="checkbox checkbox-success" >
+																<input id='rbType0' type="checkbox">
+																<label for="rbType0"><b>
+																	  All Institutions</b>
+																</label>
+															</div>
+															
+															<div class="checkbox checkbox-danger" >
+																<input id='rbType1' type="checkbox">
+																<label for="rbType1"><font color="red">
+																	 <b>College or University</b>
+																</font></label>
+															</div>
+															
+															<div class="checkbox checkbox-primary" >
+																<input id='rbType2' type="checkbox">
+																<label for="rbType2"><font color="blue">
+																	  <b>Community College</b>
+																</font></label>
+															</div>
+																	
+															<div class="checkbox checkbox-warning" >
+																<input id='rbType3' type="checkbox">
+																<label for="rbType3"> <font color="#cc9a04">
+																	  <b>Workforce Training Institute</b>
+																	  </font>
+																</label>
+															</div>			
+														</div>
+													</div>
+			      								</div>
+			  						</div>	
+								
+				 					<div class="form-group form-group-sm" style="padding-left: 10px">
+										<div class="col-sm-6">
+											<div class="btn-group" role="group" aria-label="Search">
+										<!-- 		<button class="btn btn-primary" id='search'>
+													<i class="glyphicon glyphicon-search"></i>
+													Search
+												</button> -->
+												<button class="btn btn-success" id='reset'>
+													<i class="glyphicon glyphicon-repeat"></i>
+													Reset
+												</button>
+											</div>
+										</div>
+
+										<div class="col-sm-6" style="padding-right: 10px">
+											<button class="btn btn-link" id='result_button'>
+											</button>
+											<!-- <h3><strong id="result_count2" class="label label-success"></strong> </h3> -->
+										</div>
+										<div class="col-sm-12">
+				        					<h6><em> Training characteristics can vary frequently. Please contact the training provider directly for any specific requests.</em></h6>
+										</div>
+			        				</div>
+			        			</div>
+		        			</div>
+	       				</div>
+	       			</div> 
+	            </div>
+	        </div>
+
+        <div class='col-md-8'>
+			  <noscript>
+				<div class='alert alert-info'>
+				  <h4>Your JavaScript is disabled</h4>
+				  <p>Please enable JavaScript to view the map.</p>
+				</div>
+			  </noscript>
+			  <div class="well container-fluid" >
+				<div id='map_canvas'></div>	
+				<div id='results_list'></div>
+			  </div>
+		</div> 
+		<div class='col-md-12'>
+				<section>
+
+					<div class='well'>
+					<div class="row">
+						 <div class="col-lg-8">
+								<p> <b>A list of all the institutions and courses related to the clean energy industry in North Carolina.</b></p>
+						 </div><!-- /.col-lg-6 -->
+						  <div class="col-lg-4">
+							<div class="input-group">
+							  <input type="text" class="form-control" id='global_filter' placeholder="Search for...">
+							  <span class="input-group-btn">
+								<button class="btn btn-primary" id='reset_general'><i class="glyphicon glyphicon-repeat"></i> Reset</button>
+												
+							  </span>
+							</div><!-- /input-group -->
+						  </div><!-- /.col-lg-6 -->
+					</div> <!-- /.row -->
+					
+					
+							<table id="childTable" class="tablesorter tablesorter-blue" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<th></th>
+											<th>Institution</th>
+											<th>Address</th>
+											<th>Type of Institution</th>
+											<th>Area(s)</th>
+											<th>Format(s)</th>
+										</tr>
+									</thead>
+							 
+									<tfoot>
+										<tr>
+											<th></th>
+											<th>Institution</th>
+											<th>Address</th>
+											<th>Type of Institution</th>
+											<th>Area(s)</th>
+											<th>Format(s)</th>
+										</tr>
+									</tfoot>
+								</table>
+					</div>	
+				</section>
+		</div>		
+	</div>
+	
+          <p class='pull-right'>
+            Map created by Mauricio Hernandez
+        </p> 
+        </div>
+      </div>
+    </div>
+
+    <script type='text/javascript'>
+      //<![CDATA[
+        $(window).resize(function () {
+          var h = $(window).height(),
+            offsetTop = 105; // Calculate the top offset
+        
+          $('#map_canvas').css('height', (h - offsetTop));
+        }).resize();
+        
+	  	  $('#format_filter').change(function(){
+			filterInformation(5,$('#format_filter'));
+          });
+		  
+		  $('#area_filter').change(function(){
+            filterInformation(4, $('#area_filter'));
+          });
+		  
+		  $('#global_filter').on('keyup click', function(){
+            filterGlobal();
+          });
+	
+		$('#rbType0').click(function(){
+			$("#rbType0").prop("checked", true);
+		    $("#rbType1").prop("checked", false);
+			$("#rbType2").prop("checked", false);
+			$("#rbType3").prop("checked", false);
+			
+			filterInformation(3, $('#rbType0'));
+		  });
+		  
+		  $('#rbType1').click(function(){
+			$("#rbType0").prop("checked", false);
+		    $("#rbType1").prop("checked", true);
+			$("#rbType2").prop("checked", false);
+			$("#rbType3").prop("checked", false);
+			
+			filterInformation(3, $('#rbType1'));
+		  });
+		  
+		  		$('#rbType2').click(function(){
+			$("#rbType0").prop("checked", false);
+		    $("#rbType1").prop("checked", false);
+			$("#rbType2").prop("checked", true);
+			$("#rbType3").prop("checked", false);
+			
+			filterInformation(3, $('#rbType2'));
+		  });
+		  
+		  		$('#rbType3').click(function(){
+			$("#rbType0").prop("checked", false);
+		    $("#rbType1").prop("checked", false);
+			$("#rbType2").prop("checked", false);
+			$("#rbType3").prop("checked", true);
+			
+			filterInformation(3, $('#rbType3'));
+		  });
+		  /*
+			$('#result_box').click(function () {
+				$('#map_canvas').fadeOut();
+				$('#results_list').fadeIn();
+				resultsWindow = true;
+				
+				if(newSearch == true){
+				   myMap.getList(myMap.currentWhereList);
+				   newSearch = false;
+				  }
+			 });
+			 
+			 $('#result_button').click(function () {
+				$('#map_canvas').fadeOut();
+				$('#results_list').fadeIn();
+				resultsWindow = true;
+				
+				if(newSearch == true){
+				   myMap.getList(myMap.currentWhereList);
+				   newSearch = false;
+				  }
+			 });
+
+			
+			$('#home_box').click(function () {
+				resultsWindow = false;
+				$('#map_canvas').fadeIn();
+				$('#results_list').fadeOut();
+				});
+			
+		  $(':checkbox').click(function(){
+			filterInformation(4, $('#area_filter'));
+		  });
+		  
+
+		  $(':radio').click(function(){
+			myMap.doSearch();
+		  });
+		   
+		  
+
+		  
+          $('#search_radius').change(function(){
+            myMap.doSearch();
+          });
+          
+          $('#search').click(function(){
+            myMap.doSearch();
+          });
+		  
+          $('#global_filter').change(function(){
+            myMap.doSearch();
+          });
+		  
+          $('#find_me').click(function(){
+            myMap.findMe(); 
+            return false;
+          });
+          */
+		  
+          $('#reset').click(function(){
+			
+			$("#rbType0").prop("checked", true);
+            $("#rbType1").prop("checked", false);
+			$("#rbType2").prop("checked", false);
+			$("#rbType3").prop("checked", false);
+			
+			$("#select_type").val("");	
+			$("#format_type").val("");	
+			showAllMarkers();
+            return false;
+          });
+		  
+		  
+          /*
+          $(":text").keydown(function(e){
+              var key =  e.keyCode ? e.keyCode : e.which;
+              if(key === 13) {
+                  $('#search').click();
+                  return false;
+              }
+          });
+        });*/
+    </script>
+
+	
+	<div id="FooterContentArea"><!--YMPSTITLE=TgBBAA==/YMPSTITLE--><div id="footer">
+    <div id="foot-top">
+    	<ul>
+        	<li><a href="https://energync.site-ym.com/">Home</a></li>
+            <li>|</li>
+            <li><a href="https://energync.site-ym.com/?page=AboutUs">About Us</a></li>
+            <li>|</li>
+            <li><a href="http://energync.site-ym.com/?page=Membership">Membership</a></li>
+            <li>|</li>
+            <li><a href="http://energync.site-ym.com/?page=Resources">Resources</a></li>
+             <li>|</li>
+            <li><a href="https://energync.site-ym.com/events/event_list.asp">Events</a></li>
+  <li>|</li>
+            <li><a href="http://energync.site-ym.com/?page=ContactUs">Contact Us</a></li>
+            <li>|</li>
+            <li><a href="https://energync.site-ym.com/?page=Membership">Join NCSEA</a></li>
+        </ul>
+        <ul id="social">
+        	<li><a href="https://www.facebook.com/pages/NC-Sustainable-Energy-Association/202210719818335"><img style="width: 32px; height: 32px;" src="./images/fb.png"></a></li>
+            <li><a href="https://twitter.com/nccleanenergy"><img style="width: 32px; height: 32px;" src="./images/tw.png"></a></li>
+            <li><a href="https://plus.google.com/103252765317130509287/"><img style="width: 32px; height: 32px;" src="./images/gp.png"></a></li>
+            <li><a href="https://www.linkedin.com/company/1201321"><img style="width: 32px; height: 32px;" src="./images/linkedin.png"></a></li>
+        </ul>
+    </div> 
+	
+</div></div>
+
+<!-- <footer background:url("http://restministriessunroom.co/wp-content/uploads/2013/11/footer-background.png") no-repeat center top !important;>	 -->
+	 <!-- <img src="images/footer.jpg"  alt="footer"  style="width: 100%;" >  --> 
+	<div id="copyright-wrapper"><div id="copyright"><div id="copyright-inner">Association Management Software Powered by <a href="http://www.yourmembership.com/">YourMembership.com<span style="font-size:11px">®</span></a> &nbsp;::&nbsp; <a href="http://www.energync.org/ams/legal-privacy.htm">Legal</a><!-- Copyright (c) 1998-2015 YourMembership.com Inc. All Rights Reserved. Copyright: Certain elements of this website are: Copyright (c) 1998-2015, YourMembership.com, Incorporated. YourMembership.com, Incorporated provides a limited license to use its Copyrights to the entity from whose web page you are viewing. Certain elements of this website may also be copyrighted by that entity; please see its Terms of Use or contact the organization for more information. General information about copyright laws can be found at: http://www.copyright.gov/. For more specific information, please consult an attorney. --></div></div></div>	
+
+
+<!--END_OF_FILE-->
+ <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; top: 0px; left: 0px; display: none;"></ul> 
+
+  </body>
+  <!-- 
+	!!! DO NOT REMOVE !!!
+	QA-www.energync.org
+	!!! DO NOT REMOVE !!!
+	-->
+
+</html>

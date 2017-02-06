@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2011 Google Inc. All Rights Reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<html>
+  <head>
+    <meta charset="UTF-8">
+
+    <title>Fusion Tables API Example: Advanced Visualization</title>
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <style type="text/css">
+
+      #legend {
+        background: #FFF;
+        margin: 10px;
+        padding: 5px;
+        width: 150px;
+      }
+
+      #legend p {
+        font-weight: bold;
+        margin-top: 3px;
+      }
+
+      #legend div {
+        clear: both;
+      }
+
+      .color {
+        height: 12px;
+        width: 12px;
+        margin-right: 3px;
+        float: left;
+        display: block;
+      }
+
+      .high {
+        color: #F00;
+      }
+
+      .medium {
+        color: #0F0;
+      }
+
+      .low {
+        color: #00F;
+      }
+
+      .high, .medium, .low {
+        font-weight: bold;
+      }
+    </style>
+	
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="js/jquery.address.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/gviz-api.js"></script>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	
+<script type="text/javascript">
+      google.load('visualization', '1', { packages: ['table','corechart'] });
+
+      /**
+       * Sector type mapped to a style rule.
+       * @type {Object}
+       * @const
+       */
+      var LAYER_STYLES = {
+        'Residential': {
+          'min': 0,
+          'max': 10000,
+          'colors': [
+            '#f4cccc',
+            '#ea9999',
+            '#e06666',
+            '#cc0000',
+            '#990000'
+          ]
+        },
+        'Non-Residential': {
+          'min': 0,
+          'max': 10000,
+          'colors': [
+            '#d0e0e3',
+            '#a2c4c9',
+            '#76a5af',
+            '#45818e',
+            '#134f5c'
+          ]
+        },
+        'Total': {
+          'min': 0,
+          'max': 20000,
+          'colors': [
+            '#d9d2e9',
+            '#b4a7d6',
+            '#8e7cc3',
+            '#674ea7',
+            '#351c75'
+          ]
+        }
+      }
+
+      function initialize() {
+
+        drawVisualization();
+		drawVisualizationNC();
+		drawTable();
+      }
+
+
+      function drawVisualization() {
+	  var myCounty = $("#county_sel").val();
+        google.visualization.drawChart({
+          containerId: "visualization2",
+          dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+          query: "SELECT Sector,'2006','2007','2008','2009','2010' " +
+              "FROM 18fyPg1LvW3KB3N5DE_ub-MKicB0Nx7vkGn9kw4s WHERE County = '" + myCounty + "'",
+          chartType: "ColumnChart",
+          options: {
+            title: myCounty,
+            height: 400,
+            width: 400
+          }
+        });
+      }
+    //  http://www.google.com/fusiontables/gvizdata?tq=18fyPg1LvW3KB3N5DE_ub-MKicB0Nx7vkGn9kw4s
+	  
+	  function drawVisualizationNC() {
+	  var myFormat = $("#format_sel").val();
+        google.visualization.drawChart({
+          containerId: "visual",
+		  dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+		  query: "SELECT TypeInstitution, COUNT(type) AS Results " +
+				'FROM 18THFSyt5QmEbjsYtKgcIvSzfmxudWRD-7QZ94HCA' +
+				" GROUP BY TypeInstitution",
+		  
+		/*  query: "SELECT ProgramsFormatSummary, COUNT(type) AS Results " +
+				'FROM 18THFSyt5QmEbjsYtKgcIvSzfmxudWRD-7QZ94HCA' +
+				" GROUP BY ProgramsFormatSummary",*/
+				
+          chartType: "PieChart",
+          options: {
+            title: myFormat,
+            height: 400,
+            width: 400,
+			//is3D: true,
+			pieHole: 0.4,
+			//hAxis: {title: "ID", minValue: 0, maxValue: 115},
+			//vAxis: {title: "ProgramsTypeCode", minValue: 0, maxValue: 5},
+			//legend: 'none'
+          }
+        });
+      }
+
+	  
+function drawTable() {
+		  var queryCount = "SELECT 'InstitutionName' as Institution, " +
+				"'Website' as Website, 'CompleteAddress' as Address," +
+				"'TypeInstitution' as Type, 'ProgramsAreaSummary' as Areas," +
+				"'ProgramsFormatSummary' as Format, 'Email' as Email " +
+				'FROM 18THFSyt5QmEbjsYtKgcIvSzfmxudWRD-7QZ94HCA';
+		
+		  var query = "SELECT TypeInstitution, COUNT(type) AS Results " +
+				'FROM 18THFSyt5QmEbjsYtKgcIvSzfmxudWRD-7QZ94HCA' +
+				" GROUP BY TypeInstitution";
+
+
+			var queryText = encodeURIComponent(query);		
+			var gvizQuery = new google.visualization.Query(
+				'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+			var table;
+			gvizQuery.send(function(response) {
+				table = new google.visualization.Table(document.getElementById('visualization'));
+				table.draw(response.getDataTable(),{showRowNumber: true});
+				var dataViewIndex = new google.visualization.DataView(response.getDataTable());
+				//google.visualization.DataTable.prototype.getNumberOfRows = function() {};
+				//var numero=dataViewIndex.getNumberOfRows(); //Select columns for chart
+				//drawMeanChart(dataViewMean);
+				//$("#results_total").html(numero + " results found");
+			});
+      } 
+	  
+
+	  google.setOnLoadCallback(initialize);
+
+    </script>
+	
+	
+
+  </head>
+  <body>
+   <div class='container-fluid'> 
+      <div class="row">
+		<div class="col-sm-6">	
+				<h1>Plot 1</h1>
+				<label>Type of institution:</label>
+				  <select id="type_sel">
+					<option value="">Any type</option>
+					<option value="1">College or University</option>
+					<option value="2">Community College or Training Center</option>
+					<option value="3">Workforce Training Institute</option>
+				  </select>
+				  
+				  <br/>
+				<label>County</label>
+				  <select id='county_sel' onChange="drawVisualization();">
+					<option value="Alameda">Alameda</option>
+					<option value="Alpine">Alpine</option>
+					<option value="Amador">Amador</option>
+					<option value="Butte">Butte</option>
+					<option value="Calaveras">Calaveras</option>
+					<option value="Colusa">Colusa</option>
+					<option value="Contra Costa">Contra Costa</option>
+					<option value="Del Norte">Del Norte</option>
+					<option value="El Dorado">El Dorado</option>
+					<option value="Fresno">Fresno</option>
+					<option value="Glenn">Glenn</option>
+					<option value="Humboldt">Humboldt</option>
+					<option value="Imperial">Imperial</option>
+					<option value="Inyo">Inyo</option>
+					<option value="Kern">Kern</option>
+					<option value="Kings">Kings</option>
+					<option value="Lake">Lake</option>
+					<option value="Lassen">Lassen</option>
+					<option value="Los Angeles">Los Angeles</option>
+					<option value="Madera">Madera</option>
+					<option value="Marin">Marin</option>
+					<option value="Mariposa">Mariposa</option>
+					<option value="Mendocino">Mendocino</option>
+					<option value="Merced">Merced</option>
+					<option value="Modoc">Modoc</option>
+					<option value="Mono">Mono</option>
+					<option value="Monterey">Monterey</option>
+					<option value="Napa">Napa</option>
+					<option value="Nevada">Nevada</option>
+					<option value="Orange">Orange</option>
+					<option value="Placer">Placer</option>
+					<option value="Plumas">Plumas</option>
+					<option value="Riverside">Riverside</option>
+					<option value="Sacramento">Sacramento</option>
+					<option value="San Benito">San Benito</option>
+					<option value="San Bernardino">San Bernardino</option>
+					<option value="San Diego">San Diego</option>
+					<option value="San Francisco">San Francisco</option>
+					<option value="San Joaquin">San Joaquin</option>
+					<option value="San Luis Obispo">San Luis Obispo</option>
+					<option value="San Mateo">San Mateo</option>
+					<option value="Santa Barbara">Santa Barbara</option>
+					<option value="Santa Clara">Santa Clara</option>
+					<option value="Santa Cruz">Santa Cruz</option>
+					<option value="Shasta">Shasta</option>
+					<option value="Sierra">Sierra</option>
+					<option value="Siskiyou">Siskiyou</option>
+					<option value="Solano">Solano</option>
+					<option value="Sonoma">Sonoma</option>
+					<option value="Stanislaus">Stanislaus</option>
+					<option value="Sutter">Sutter</option>
+					<option value="Tehama">Tehama</option>
+					<option value="Trinity">Trinity</option>
+					<option value="Tulare">Tulare</option>
+					<option value="Tuolumne">Tuolumne</option>
+					<option value="Ventura">Ventura</option>
+					<option value="Yolo">Yolo</option>
+					<option value="Yuba">Yuba</option>
+				  </select>
+
+	
+				  <div id="visualization2"> </div>
+			</div>
+		
+		 <div class="col-sm-6"> 
+		<h1>Plot 2</h1>
+		  <label>Format:</label>
+		  <select id='format_sel' onChange="drawVisualizationNC();">
+			<option value='Classroom'>Classroom</option>
+			<option value='Technical'>Technical Conference Classes</option>
+			<option value='Webinar'>Webinar</option>
+			<option value='Online'>Online</option>
+		  </select>
+		 <div id="visual"></div>
+	  </div>
+	  
+	  
+	  <div class="row">
+	  	<div class='col-md-12'> 
+		<h1> Interactive Table </h1>
+		 <div id="visualization"> </div>
+		</div>
+	  </div>
+</div>
+<!-- </div> -->
+    
+  </body>
+  
+
+	
+  <script type='text/javascript'>
+ /* $('#county_sel').change(function(){
+            drawVisualization();
+          });
+  */
+  
+  </script>
+  
+  
+</html>

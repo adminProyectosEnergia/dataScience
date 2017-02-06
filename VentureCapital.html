@@ -1,0 +1,695 @@
+<!DOCTYPE html">
+<!-- saved from url=(0040)http://sites.nicholas.duke.edu/innovate/ -->
+<html lang="en-US">
+
+<head profile="http://gmpg.org/xfn/11"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<!-- Meta Images -->
+	<link rel="shortcut icon" href="http://nicholas.duke.edu/graphics/favicon.ico" type="image/x-icon">	
+<!-- Title and External Script Integration -->
+<title>Venture Capital Advanced Visualization</title>
+		
+	
+<!-- Wordpress Stuff -->
+	<meta name="generator" content="WordPress 4.3"> <!-- leave this for stats -->
+	<link rel="alternate" type="application/rss+xml" title="EI&amp;E Certificate Program RSS Feed" href="http://sites.nicholas.duke.edu/innovate/feed/">
+	<link rel="pingback" href="http://sites.nicholas.duke.edu/innovate/xmlrpc.php">
+	 <!-- This makes the comment box appear where the ‘reply to this comment’ link is -->
+		<script type="text/javascript" async="" src="./VentureCapital_files/ga.js"></script><script type="text/javascript" src="./VentureCapital_files/saved_resource"></script>
+		<link rel="alternate" type="application/rss+xml" title="EI&amp;E Certificate Program » Home Comments Feed" href="http://sites.nicholas.duke.edu/innovate/home/feed/">
+		<script type="text/javascript">
+			window._wpemojiSettings = {"baseUrl":"http:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"http:\/\/sites.nicholas.duke.edu\/innovate\/wp-includes\/js\/wp-emoji-release.min.js?ver=4.3"}};
+			!function(a,b,c){function d(a){var c=b.createElement("canvas"),d=c.getContext&&c.getContext("2d");return d&&d.fillText?(d.textBaseline="top",d.font="600 32px Arial","flag"===a?(d.fillText(String.fromCharCode(55356,56812,55356,56807),0,0),c.toDataURL().length>3e3):(d.fillText(String.fromCharCode(55357,56835),0,0),0!==d.getImageData(16,16,1,1).data[0])):!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g;c.supports={simple:d("simple"),flag:d("flag")},c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.simple&&c.supports.flag||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);
+		</script><script src="./VentureCapital_files/wp-emoji-release.min.js" type="text/javascript"></script>
+		<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+<script type="text/javascript" src="./VentureCapital_files/jquery.js"></script>
+<script type="text/javascript" src="./VentureCapital_files/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="./VentureCapital_files/external-tracking.min.js"></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://sites.nicholas.duke.edu/innovate/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://sites.nicholas.duke.edu/innovate/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 4.3">
+<link rel="canonical" href="#">
+<link rel="shortlink" href="#">
+<link rel="stylesheet" href="./VentureCapital_files/alert.css" type="text/css" media="Screen">
+<link rel="stylesheet" href="css/bootstrap.min.css"/>
+<style type="text/css">
+#googft-mapCanvas {
+  height: 300px;
+  margin: 0;
+  padding: 0;
+  width: 500px;
+}
+	.myTable{
+	height: 50px;
+	width: 400px;
+	}
+      #legend {
+        background: #FFF;
+        margin: 10px;
+        padding: 5px;
+        width: 150px;
+      }
+
+      #legend p {
+        font-weight: bold;
+        margin-top: 3px;
+      }
+
+      #legend div {
+        clear: both;
+      }
+
+      .color {
+        height: 12px;
+        width: 12px;
+        margin-right: 3px;
+        float: left;
+        display: block;
+      }
+
+      .high {
+        color: #F00;
+      }
+
+      .medium {
+        color: #0F0;
+      }
+
+      .low {
+        color: #00F;
+      }
+
+      .high, .medium, .low {
+        font-weight: bold;
+      }
+    </style>
+
+	
+	
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/gviz-api.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false&amp;v=3"></script>
+
+<script type="text/javascript">
+      google.load('visualization', '1', { packages: ['table','corechart'] });
+	  google.load('visualization', '1.1', {packages: ['scatter']});
+	  google.load("visualization", "1.1", {packages:["table"]});
+
+      /**
+       * Sector type mapped to a style rule.
+       * @type {Object}
+       * @const
+       */
+	   
+      /* FUSION TABLE's IDs
+		States		1SqGxuN1SWc7aazXz5F-sStd5OT1014Zc-iBmI5Sp
+		USA			1OKsr7pq8xH41QLKS5wgDqWJtX8-UKtXqsElcE2sV
+		Ranks		1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d
+	  */
+
+	  
+      function initialize() {
+		var myState = $("#state_sel").val();
+		drawVisualizationVenture(myState);
+		drawVisualizationShare(myState);
+		drawVisualizationVentureUSA();
+		drawVisualizationShareUSA();
+		//Update information in Tables
+		drawTableDollars(myState);
+		drawTableDeals(myState);
+		drawTableRankings2013(myState);
+		drawTablePopulation(myState);
+		//drawTable();
+		//drawTableVenture();
+      }
+
+	  function updateVisualization(){
+		var myState = $("#state_sel").val();
+		drawVisualizationVenture(myState);
+		drawVisualizationShare(myState);
+		//Update information in Tables
+		drawTableDollars(myState);
+		drawTableDeals(myState);
+		drawTableRankings2013(myState);
+		drawTablePopulation(myState);
+		
+	  }
+
+    
+function drawVisualizationVentureUSA() {
+  google.visualization.drawChart({
+  containerId: "visualizationVentureUSA",
+  dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+  query: "SELECT Year,'Dollars','SeedAndEarlyDollars' " +
+	  "FROM 1OKsr7pq8xH41QLKS5wgDqWJtX8-UKtXqsElcE2sV " ,
+  chartType: "LineChart",
+  
+  options: {
+	  title: "US Venture Capital Data",
+	  subtitle: 'Source:',
+	  legend: 'right',
+	  curveType: 'function',
+	  pointShape: 'circle',
+	  dataOpacity: 0.6,
+	  pointSize: 15,
+	  height: 300,
+	  width: 650,
+	  vAxis: {title: '$ Billion', minValue:0, maxValue:60},		
+	  chartArea: {
+	  height: '80%',
+	  width: '60%',
+	  top: '10%',
+	  left: '10%'
+	  }
+ }
+});
+}
+	  
+function drawVisualizationShareUSA() {
+	google.visualization.drawChart({
+	  containerId: "visualizationShareUSA",
+	  dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+	 query: "SELECT Year,'AverageDealSize','Deals' " +
+	  "FROM 1OKsr7pq8xH41QLKS5wgDqWJtX8-UKtXqsElcE2sV " ,
+	  
+	  chartType: "Scatter",
+		options: {
+				  chart: {
+					title: 'US Venture Capital Data',
+					subtitle: 'Average Deal Size & Number of Deals'
+				  },
+				  width: 650,
+				  height: 400,
+				  series: {
+					0: {axis: 'AverageDealSize', pointShape: 'circle', pointSize:'50'},
+					1: {axis: 'Deals', pointShape: 'circle', pointSize:'50'}
+				  },
+				  axes: {
+					y: {
+					  'AverageDealSize': {label: 'Deal Size [$ Millions]'},
+					  'Deals': {label: 'Number of Deals'}
+					}
+				  }
+				}
+	});
+}
+	  
+
+function drawVisualizationShareUSAOld() {
+	google.visualization.drawChart({
+	  containerId: "visualizationShareUSA",
+	  dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+	 query: "SELECT Year,'AverageDealSize','Deals' " +
+	  "FROM 1OKsr7pq8xH41QLKS5wgDqWJtX8-UKtXqsElcE2sV " ,
+	  
+	  chartType: "LineChart",
+	  options: {
+		  title: "US Venture Capital Data",
+		  subtitle: 'Source:',
+		  legend: 'right',
+		  curveType: 'function',
+		  pointShape: 'square',
+		  dataOpacity: 0.6,
+		  pointSize: 15,
+		  height: 300,
+		  width: 650,
+		  vAxis: {title: 'Deal Size {$ Millions}', minValue:0, maxValue:50},		   
+		  chartArea: {
+		  height: '80%',
+		  width: '50%',
+		  top: '10%',
+		  left: '10%'
+		  }
+	 }
+	});
+}
+	  
+function drawVisualizationVenture(selectedState) {
+	google.visualization.drawChart({
+	  containerId: "visualizationVenture",
+	  dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+	  query: "SELECT Year,'Dollars','SeedAndEarlyDollars' " +
+		  "FROM 1SqGxuN1SWc7aazXz5F-sStd5OT1014Zc-iBmI5Sp WHERE State = '" + selectedState + "'",		  
+	  chartType: "LineChart",
+	  
+	  options: {
+		  title: selectedState+": Dollars vs Seed & Early Dollars",
+		  subtitle: 'Source:',
+		  legend: 'right',
+		  curveType: 'function',
+		  pointShape: 'square',
+		  dataOpacity: 0.6,
+		  pointSize: 15,
+		  height: 300,
+		  width: 650,
+		  series: {
+            0: { color: '#43459d' },
+			1: { color: '#e2431e' }
+		  },
+		  vAxis: {title: '$ Million'},		   
+		  chartArea: {
+		  height: '80%',
+		  width: '50%',
+		  top: '10%',
+		  left: '10%'
+		  }
+	 }
+	});
+  }
+	  
+	  
+function drawVisualizationShare(selectedState) {
+        google.visualization.drawChart({
+          containerId: "visualizationShare",
+          dataSourceUrl: "http://www.google.com/fusiontables/gvizdata?tq=",
+          query: "SELECT Year,'ShareDollars','ShareDeals' " +
+              "FROM 1SqGxuN1SWc7aazXz5F-sStd5OT1014Zc-iBmI5Sp WHERE State = '" + selectedState + "'",		  
+          chartType: "LineChart",
+		  options: {
+			  title: selectedState +": Share",
+			  subtitle: 'Source:',
+			  legend: 'right',
+			  curveType: 'function',
+			  pointShape: 'square',
+			  dataOpacity: 0.6,
+			  pointSize: 15,
+			  height: 300,
+			  width: 650,
+			  series: {
+				0: { color: '#43459d' },
+				1: { color: '#e2431e' }
+			  },
+			  vAxis: {minValue:0, maxValue:50},
+			  vAxis: {title: 'Percentage'},		   
+			  chartArea: {
+			  height: '80%',
+			  width: '50%',
+			  top: '10%',
+			  left: '10%'
+			  }
+         }
+        });
+      }
+
+
+function drawTableDollars(selectedState) {
+	  var query = "SELECT 'DollarsRank' as Dollars, " +
+			"'ShareDollarsRank' as Share_Dollars, " +
+			"'PerCapitaDollarsRank' as Per_Capita_Dollars_Rank " +
+			"FROM 1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d WHERE State = '" + selectedState + "'";
+
+		var queryText = encodeURIComponent(query);		
+		var gvizQuery = new google.visualization.Query(
+			'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+		var table;
+		gvizQuery.send(function(response) {
+			table = new google.visualization.Table(document.getElementById('tableDollars'));
+			var formatter = new google.visualization.ColorFormat();
+			formatter.addRange(31, 51, 'black', '#FFB2B2');
+			formatter.addRange(10.6, 30.5, 'black', '#FFFF99');
+			formatter.addRange(0, 10.5, 'black', '#A3FF85');
+			formatter.format(response.getDataTable(), 0); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 1); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 2); // Apply formatter to second column
+
+			table.draw(response.getDataTable(),{allowHtml: true, showRowNumber: false, width: '100%', height: '100%'});
+			var dataViewIndex = new google.visualization.DataView(response.getDataTable());
+		});
+} 
+
+function drawTableDeals(selectedState) {
+	  var query = "SELECT 'DealsRank' as Deals, " +
+			"'ShareDealsRank' as Share_of_Deals, 'AverageDealSizeRank' as Average_Deal_Size " +
+			"FROM 1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d WHERE State = '" + selectedState + "'";
+
+		var queryText = encodeURIComponent(query);		
+		var gvizQuery = new google.visualization.Query(
+			'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+		var table;
+		gvizQuery.send(function(response) {
+			table = new google.visualization.Table(document.getElementById('tableDeals'));
+			var formatter = new google.visualization.ColorFormat();
+			formatter.addRange(31, 51, 'black', '#FFB2B2');
+			formatter.addRange(10.6, 30.5, 'black', '#FFFF99');
+			formatter.addRange(0, 10.5, 'black', '#A3FF85');
+			formatter.format(response.getDataTable(), 0); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 1); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 2); // Apply formatter to second column
+
+			table.draw(response.getDataTable(),{allowHtml: true, showRowNumber: false, width: '100%', height: '100%'});
+			var dataViewIndex = new google.visualization.DataView(response.getDataTable());
+		});
+} 
+
+
+function drawTableRankings2013(selectedState) {
+	  var query = "SELECT 'SeedAndEarlyDealsRank' as Seed_and_Early_Deals, " +
+			"'SeedAndEarlyDollarsRank' as Seed_and_Early_Dollars, 'PopulationRank' as Population " +
+			"FROM 1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d WHERE State = '" + selectedState + "'";
+	
+		var queryText = encodeURIComponent(query);		
+		var gvizQuery = new google.visualization.Query(
+			'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+		var table;
+		gvizQuery.send(function(response) {
+			table = new google.visualization.Table(document.getElementById('tableRankings2013'));
+			var formatter = new google.visualization.ColorFormat();
+			formatter.addRange(31, 51, 'black', '#FFB2B2');
+			formatter.addRange(10.6, 30.5, 'black', '#FFFF99');
+			formatter.addRange(0, 10.5, 'black', '#A3FF85');
+			formatter.format(response.getDataTable(), 0); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 1); // Apply formatter to second column
+			formatter.format(response.getDataTable(), 2); // Apply formatter to second column
+
+			table.draw(response.getDataTable(),{allowHtml: true, showRowNumber: false, width: '100%', height: '100%'});
+			var dataViewIndex = new google.visualization.DataView(response.getDataTable());
+		});
+} 
+
+function drawTablePopulation(selectedState) {
+	  
+
+	    var query = "SELECT 'Population' as Population_million " +
+			"FROM 1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d WHERE State = '" + selectedState + "'";
+
+		var queryText = encodeURIComponent(query);		
+		var gvizQuery = new google.visualization.Query(
+			'http://www.google.com/fusiontables/gvizdata?tq=' + queryText);
+		var table;
+		gvizQuery.send(function(response) {
+			table = new google.visualization.Table(document.getElementById('tablePopulation'));
+			table.draw(response.getDataTable(),{showRowNumber: false});
+			var dataViewIndex = new google.visualization.DataView(response.getDataTable());
+		});
+} 
+
+google.setOnLoadCallback(initialize);
+</script>
+</head>
+
+<body class="home page page-id-2 page-template-default" onload="initializeMap();">
+
+<div id="dukealertbar">
+<script src="./VentureCapital_files/alert.html" type="text/javascript"></script><div class="duke-alert duke-alert-0" id="dukealert">
+</div>
+</div>
+   <div id="nsheader" style="height:50px; background-image: url(&#39;http://sites.nicholas.duke.edu/wp-content/uploads/sites-header.jpg&#39;)">
+   <div id="nslogo" style="height:50px"><a href="http://www.nicholas.duke.edu/"><img src="./VentureCapital_files/nsoe-logo.png" width="425px" height="50px" id="nicholaslogo"></a></div>
+
+<input name="siteurl" type="hidden" value="sites.nicholas.duke.edu/innovate/"><input name="ref" type="hidden" value="sites.nicholas.duke.edu/innovate/electives/"><input name="ss" type="hidden" value=""></form>
+<script type="text/javascript" src="./VentureCapital_files/brand"></script>
+</div>
+   
+   </div><style type="text/css" media="all">
+/* <![CDATA[ */
+@import url("http://sites.nicholas.duke.edu/innovate/wp-content/plugins/wp-table-reloaded/css/plugin.css?ver=1.9.4");
+@import url("http://sites.nicholas.duke.edu/innovate/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.9.4");
+.wp-table-reloaded td {
+text-align:center;
+text-align:center;
+}
+
+.wp-table-reloaded-id-N td {
+  font-size: 14px;
+}
+/* ]]> */
+</style><!-- Google Analytics Tracking by Google Analyticator 6.4.9: http://www.videousermanuals.com/google-analyticator/ -->
+<script type="text/javascript">
+    var analyticsFileTypes = ['mp3',' pdf',' doc',' xls',' ppt'];
+    var analyticsSnippet = 'enabled';
+    var analyticsEventTracking = 'enabled';
+</script>
+<script type="text/javascript">
+	var _gaq = _gaq || [];
+  
+	_gaq.push(['_setAccount', 'UA-29859262-1']);
+    _gaq.push(['_addDevId', 'i9k95']); // Google Analyticator App ID with Google
+	_gaq.push(['_trackPageview']);
+
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+		                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	})();
+</script>
+
+<!-- Stylesheets -->
+	<link rel="stylesheet" href="./VentureCapital_files/reset.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="./VentureCapital_files/wp_core.css" type="text/css" media="screen">
+	<link rel="stylesheet" href="./VentureCapital_files/style.css" type="text/css" media="screen">
+
+<!-- Modules w/ Javascript -->	
+
+<!-- IE -->
+<!--[if IE 6]>
+	<link rel="stylesheet" href="http://sites.nicholas.duke.edu/innovate/wp-content/themes/whitehouse/css/ie6.css" type="text/css" media="screen" />
+	<script  type="text/javascript"  src="http://sites.nicholas.duke.edu/innovate/wp-content/themes/whitehouse/js/belatedpng.js"></script>
+	<script>
+	  DD_belatedPNG.fix('.pngbg, .welcometext, .icons a, .containershadow, .fboxdividers, #morefootbg, .plimage, .post-footer .left span, #welcome');
+	 </script>	
+<![endif]--><style type="text/css">
+
+
+</style>
+<!-- Font Replacement -->
+  		
+	<div id="site">
+		<div id="wrapper">
+					<div id="header" class="fix">
+						<div class="content fix" align="center" >
+							<div class="headline">
+								<a class="home" href="./VentureCapital_files/VentureCapital.html" title="EI&amp;E Certificate Program"><img src="./VentureCapital_files/innovate.gif" alt="EI&amp;E Certificate Program"></a>
+							</div>
+							<div class="icons">
+								<a target="_blank" href="http://sites.nicholas.duke.edu/innovate/feed/" class="rsslink"></a>							
+							</div>
+						</div>
+					</div>
+					<div class="container fix ">
+						<div class="effect containershadow">
+							<div class="effect containershadow_rpt">
+								<div id="sitenav" class="content fix">
+									<div id="nav" class="fix">
+									 	
+									</div><!-- /nav -->
+									<div class="clear"></div>
+								</div>
+							</div>		
+
+							<div id="contentcontainer" class="content fix"> 
+								<div id="contentborder">
+										<div id="maincontent">
+										
+	<br>
+	<h1 style="text-align: center; text-shadow: 2px 2px #CCCCCC; font-size: 40px;" > Venture Capital Database </h1>
+	<br>
+	<div class='container-fluid'> 
+	
+      <div class="row">
+		<div class='col-md-6'> 
+		
+		  <label>State</label>
+			<select id='state_sel' onChange="updateVisualization();">
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="DC">District of Columbia</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option selected="selected" value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="PR">Puerto Rico</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>	
+		<h2>Plot 1</h2>		
+			<span id="visualizationVenture"></span>		
+	    </div>
+				
+		<div class="col-md-6">	
+		<br>
+		<br>
+		<h2>Plot 2</h2>
+		<span id="visualizationShare"></span>
+		</div>
+	</div><!-- row -->
+	<hr>	
+	<div class="row">
+	<div class='col-md-6'> 
+		<h2>Plot 3</h2>
+		<span id="visualizationVentureUSA"></span>
+	</div>
+	
+	<div class='col-md-6'> 
+		<h2>Plot 4</h2>
+		<span id="visualizationShareUSA"></span>
+	</div>
+	</div>
+	<hr>
+	<div class="row">
+		<div class='col-md-6'> 
+			<h2>Rankings</h2>
+			<br>
+			<h3>2014 Rankings</h3>
+			<div id="tableDollars" class="myTable"></div>
+			<div id="tableDeals" class="myTable"></div>
+			<br>
+			<h3>2013 Rankings</h3>
+			<div id="tableRankings2013" class="myTable"></div>
+			<br>
+			<h3>2013 Demographics</h3>
+			<div id="tablePopulation" class="myTable"></div>
+		</div>
+		<div class='col-md-6'> 
+			<div id="googft-mapCanvas"></div>
+		</div>
+	</div> <!-- row -->
+</div> <!-- container -->
+<br>										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										
+										</div>
+								</div>
+							</div>
+						</div>
+					</div> 
+			</div>
+	</div>
+
+<div style="background-color:white; height:75px;text-align:center;">
+©2015 Nicholas School of the Environment | Box 90328 | Duke University | Durham, NC 27708 
+<p><a href="http://www.nicholas.duke.edu/about/contact/">how to contact us &gt;</a> | <a href="http://sites.nicholas.duke.edu/innovate/wp-login.php">login to the site &gt;</a></p>
+</div><!-- Powered by WPtouch: 3.8.3 -->
+
+<script type="text/javascript" src="./VentureCapital_files/form.js"></script>
+<script type="text/javascript" src="./VentureCapital_files/comment-reply.min.js"></script>
+
+<script type="text/javascript">
+  function initializeMap() {
+    google.maps.visualRefresh = true;
+    var isMobile = (navigator.userAgent.toLowerCase().indexOf('android') > -1) ||
+      (navigator.userAgent.match(/(iPod|iPhone|iPad|BlackBerry|Windows Phone|iemobile)/));
+    if (isMobile) {
+      var viewport = document.querySelector("meta[name=viewport]");
+      viewport.setAttribute('content', 'initial-scale=1.0, user-scalable=no');
+    }
+    var mapDiv = document.getElementById('googft-mapCanvas');
+    mapDiv.style.width = isMobile ? '100%' : '500px';
+    mapDiv.style.height = isMobile ? '100%' : '300px';
+    var map = new google.maps.Map(mapDiv, {
+      center: new google.maps.LatLng(38.749791865281374, -95.18619615),
+      zoom: 3,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend-open'));
+    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(document.getElementById('googft-legend'));
+
+    layer = new google.maps.FusionTablesLayer({
+      map: map,
+      heatmap: { enabled: false },
+      query: {
+        select: "col0",
+        from: "1fa_GVMZ6JxfV4BlRFCY5s_7xMoDa-sGOmx7Sdn_d",
+        where: ""
+      },
+      options: {
+        styleId: 2,
+        templateId: 2
+      }
+    });
+
+    if (isMobile) {
+      var legend = document.getElementById('googft-legend');
+      var legendOpenButton = document.getElementById('googft-legend-open');
+      var legendCloseButton = document.getElementById('googft-legend-close');
+      legend.style.display = 'none';
+      legendOpenButton.style.display = 'block';
+      legendCloseButton.style.display = 'block';
+      legendOpenButton.onclick = function() {
+        legend.style.display = 'block';
+        legendOpenButton.style.display = 'none';
+      }
+      legendCloseButton.onclick = function() {
+        legend.style.display = 'none';
+        legendOpenButton.style.display = 'block';
+      }
+    }
+  }
+
+  google.maps.event.addDomListener(window, 'load', initializeMap);
+</script>
+
+<!-- Quick Cache file path: /cache/quick-cache/cache/http/sites-nicholas-duke-edu/innovate.html -->
+<!-- Quick Cache file built for (http://sites.nicholas.duke.edu/innovate/) in 0.09258 seconds, on: Aug 29th, 2015 @ 1:11 pm UTC. -->
+<!-- This Quick Cache file will auto-expire (and be rebuilt) on: Aug 29th, 2015 @ 1:11 pm UTC (based on your configured expiration time). -->
+
+</div>
+
+
+</body>
+</html>
